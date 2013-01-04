@@ -1,0 +1,22 @@
+.button {
+    margin: 5px;
+    padding: 5px;
+    width: 100px;
+}
+
+.ready {
+    background-color: #dcdcdc;
+    border: 1px solid #666;
+}
+
+.ringing {
+    background-color: #008000;
+    border: 1px solid #006400;
+    color: white;
+}
+
+.talking {
+    color: white;
+    background-color: #FF4500;
+    border: 1px solid #8B0000;
+}

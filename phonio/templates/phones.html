@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="en" ng-app="Dialer">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="/static/css/grids-min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/phone.css">
+    </head>
+    <body>
+        <div class="yui3-g">
+            <div class="yui3-u">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+
+        <div class="yui3-g">
+            {% for number in rolodex.numbers() %}
+                <div class="yui3-u-1-3">
+                    <div class="phone">
+                        <iframe name='{{rolodex.get_name(number)}}'
+                            id='{{rolodex.get_name(number)}}'
+                            src="/phones/{{rolodex.get_name(number)}}"
+                            frameborder="0" border="0" cellspacing="0"
+                            style="border-style: none;width: 100%; height: 100%">
+                        </iframe>
+                    </div>
+                </div>
+            {% end %}
+        </div>
+    </body>
+</html>

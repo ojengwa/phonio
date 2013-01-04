@@ -1,0 +1,12 @@
+body {
+    margin: auto;
+    width: 720px;
+}
+
+.phone {
+    border: 2px solid orange;
+    height: 200px;
+    margin: 10px;
+    text-align: center;
+    overflow: hidden;
+}

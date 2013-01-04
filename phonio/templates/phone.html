@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en" ng-app="Softphone">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="//static.twilio.com/libs/twiliojs/1.1/twilio.min.js"></script>
+        <script type="text/javascript" src="/static/js/angular.js"></script>
+        <script type="text/javascript" src="/static/js/phone.js"></script>
+        <link rel="stylesheet" type="text/css" href="/static/css/button.css">
+    </head>
+    <body>
+        <h1>{{ name.capitalize() }}</h1>
+        <p>{{ pp_phone(number) }}</p>
+        <div ng-controller="PhoneCtrl">
+            <div ng-show="ready()">
+                <button class="button ready">
+                    Ready
+                </button>
+            </div>
+            
+            <div ng-show="ringing()">
+                <button ng-click="pickup()" class="button ringing">
+                    Answer
+                </button>
+            </div>
+
+            <div ng-show="talking()">
+                <button ng-click="hangup()" class="button talking">
+                    Hangup
+                </button>
+            </div>
+        </div>
+        <script type="text/javascript">
+            Twilio.Device.setup("{{ device_token }}");
+        </script>
+    </body>
+</html>

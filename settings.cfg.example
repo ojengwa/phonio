@@ -1,0 +1,14 @@
+[phonio]
+cookie_secret = zqjkxbmwv
+authorized_domains = quietdynamite.com,carbonfive.com
+
+[twilio]
+# Replace these values with the real values from Twilio
+app_id = abcd
+account_sid = xzy
+auth_token = aoeui
+
+[url]
+base = http://quietdynamite.com:8000 # must be publicly accessible
+voice = %(base)s/voice # Set the Twilio voice url to this value, e.i., http://quietdynamite.com:8000/voice
+status = %(base)s/status

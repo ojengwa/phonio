@@ -1,0 +1,4 @@
+.vimrc
+*.pyc
+settings.cfg
+tags
