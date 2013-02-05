@@ -6,7 +6,7 @@ import twilio.twiml
 from twilio.rest import TwilioRestClient
 from twilio.util import TwilioCapability
 
-from phonio.auth import CurrentUserMixin
+from phonio.auth import RestrictedHandler
 from phonio import config
 from phonio import util
 
@@ -41,16 +41,16 @@ class Rolodex(object):
             self._names_to_numbers = dict(zip(self.names, self.numbers()))
         return self._names_to_numbers[name]
 
-class BaseHandler(RequestHandler, CurrentUserMixin):
+class RolodexHandler(RestrictedHandler):
     def initialize(self):
         self.rolodex = Rolodex(self)
 
-class PhonesHandler(BaseHandler):
+class PhonesHandler(RolodexHandler):
     @authenticated
     def get(self):
         self.render("phones.html", rolodex=self.rolodex)
 
-class PhoneHandler(BaseHandler):
+class PhoneHandler(RolodexHandler):
     @authenticated
     def get(self, name):
         capability = TwilioCapability(TWILIO_CONFIG.account_sid, TWILIO_CONFIG.auth_token)

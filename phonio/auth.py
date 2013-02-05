@@ -7,17 +7,17 @@ from phonio import config
 cfg = config.settings("settings.cfg", "phonio")
 AUTHORIZED_DOMAINS = cfg.authorized_domains.split(',')
 
-class CurrentUserMixin(object):
+class RestrictedHandler(RequestHandler):
     def get_current_user(self):
         user_json = self.get_secure_cookie("user")
         if not user_json: return None
         return json_decode(user_json)
 
-class LoginHandler(RequestHandler, CurrentUserMixin):
+class LoginHandler(RestrictedHandler):
     def get(self):
         return self.render("login.html")
 
-class LogoutHandler(RequestHandler, CurrentUserMixin):
+class LogoutHandler(RestrictedHandler):
     def get(self):
         self.clear_all_cookies()
         return self.render("logout.html")
