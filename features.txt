@@ -1,0 +1,7 @@
+- Click to call
+- Conference
+- Warm transfer
+- Cold transfer
+- Voicemail
+- Hold/Resume
+- Call recording

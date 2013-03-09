@@ -1,0 +1,3 @@
+* Set secure cookie with nginx header
+* Remove trailing slashes
+* Files permission security audit
