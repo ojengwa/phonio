@@ -11,6 +11,7 @@ URL_CONFIG = config.settings("settings.cfg", "url")
 
 AsyncHTTPClient.configure(CurlAsyncHTTPClient)
 
+
 class Rooming(RequestHandler):
 
     def initialize(self, fetcher=None):
@@ -24,6 +25,7 @@ class Rooming(RequestHandler):
         res = None
         for phid in phonables:
             res = yield gen.Task(self.fetcher.fetch,
-                    URL_CONFIG.phonable_url + "/" + phid)
-        body = json.dumps(res)
+                                 URL_CONFIG.phonable_url + "/" + phid)
+        self.set_status(res.code)
+        body = {"number": json.loads(res.body)["number"]}
         self.finish(body)

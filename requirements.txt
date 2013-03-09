@@ -1,3 +1,4 @@
-tornado>=2.4.1
-twilio>=3.4.2
-mock>=1.0.1
+psycopg2==2.4.6
+pycurl==7.19.0
+tornado==2.4.1
+twilio==3.4.2
