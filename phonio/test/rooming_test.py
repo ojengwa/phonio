@@ -13,10 +13,7 @@ from phonio.room import Rooming
 
 class RoomingTest(AsyncHTTPTestCase, LogTrapTestCase):
     def get_app(self):
-        self.fetcher = AsyncHTTPClient()
-        return Application([
-            (r"/rooms", Rooming, {"fetcher": self.fetcher}),
-            ])
+        return Application([(r"/rooms", Rooming)])
 
     def get_new_ioloop(self):
         return IOLoop.instance()
@@ -24,10 +21,10 @@ class RoomingTest(AsyncHTTPTestCase, LogTrapTestCase):
     def test_post_phonable_ids(self):
         result = MagicMock(code=200)
         result.body = json.dumps({"number": "+13103004000"})
-        attrs = { "get_result.return_value": result }
+        attrs = {"get_result.return_value": result}
         with patch("phonio.room.gen.Task", spec=YieldPoint, **attrs) as task:
-            # payload = urlencode([('phonables', 'abc'), ('phonables', 'def')])
-            payload = urlencode([('phonables', 'abc')])
+            payload = urlencode([('phonables', 'abc'), ('phonables', 'def')])
+            # payload = urlencode([('phonables', 'abc')])
             res = self.fetch("/rooms", method="POST", body=payload)
 
             self.assertEqual(res.code, 200)

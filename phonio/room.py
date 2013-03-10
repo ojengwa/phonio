@@ -15,7 +15,7 @@ AsyncHTTPClient.configure(CurlAsyncHTTPClient)
 class Rooming(RequestHandler):
 
     def initialize(self, fetcher=None):
-        self.fetcher = fetcher
+        self.fetcher = fetcher or AsyncHTTPClient()
 
     @asynchronous
     @gen.engine
