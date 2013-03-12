@@ -20,16 +20,17 @@ class RoomingTest(AsyncHTTPTestCase, LogTrapTestCase):
 
     def test_post_phonable_ids(self):
 
-        def phonable(func, url):
+        def phonable_task(func, url):
             number = '+12103004000' if url.endswith('abc') else '+13103004000'
+            reply = MagicMock()
+            reply.code = 200
+            reply.body = json.dumps({"number": number})
 
-            result = MagicMock(code=200, spec=YieldPoint)
-            result.body = json.dumps({"number": number})
+            task = MagicMock(spec=YieldPoint)
+            task.get_result.return_value = reply
+            return task
 
-            attrs = {"get_result.return_value": result}
-            return MagicMock(spec=YieldPoint, **attrs)
-
-        with patch("phonio.room.gen.Task", side_effect=phonable) as task:
+        with patch("phonio.room.gen.Task", side_effect=phonable_task) as task:
             payload = urlencode([('phonables', 'abc'), ('phonables', 'def')])
             res = self.fetch("/rooms", method="POST", body=payload)
 
