@@ -21,10 +21,7 @@ class RoomingTest(AsyncHTTPTestCase, LogTrapTestCase):
     def test_post_phonable_ids(self):
 
         def phonable(func, url):
-            if url.endswith('def'):
-                number = '+13103004000'
-            else:
-                number = '+12103004000'
+            number = '+12103004000' if url.endswith('abc') else '+13103004000'
 
             result = MagicMock(code=200, spec=YieldPoint)
             result.body = json.dumps({"number": number})

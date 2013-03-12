@@ -26,7 +26,7 @@ class Rooming(RequestHandler):
         phonables = self.get_arguments("phonables")
         results = yield [gen.Task(self.fetcher.fetch, phonable_path(phid))
                          for phid in phonables]
-        self.set_status(results[0].code)
+        self.set_status(results[0].code) #TODO remove me
         numbers = [json.loads(r.body)["number"] for r in results]
         body = {"numbers": numbers}
         self.finish(body)
